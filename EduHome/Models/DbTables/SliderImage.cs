@@ -11,6 +11,8 @@ namespace EduHome.Models.DbTables
 
         public string Image { get; set; }
 
+        public int LineOrdeer { get; set; }
+
         public int SliderId { get; set; }
 
         public Slider Slider { get; set; }

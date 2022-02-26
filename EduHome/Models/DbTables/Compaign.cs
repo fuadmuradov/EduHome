@@ -5,15 +5,12 @@ using System.Threading.Tasks;
 
 namespace EduHome.Models.DbTables
 {
-    public class Slider
+    public class Compaign
     {
         public int id { get; set; }
+        public int DiscountPercent { get; set; }
 
-        public string Title { get; set; }
-
-        public string Description { get; set; }
-
-        public List<SliderImage> SliderImages { get; set; }
-
+        public int CourseId { get; set; }
+        public Course Course { get; set; }
     }
 }

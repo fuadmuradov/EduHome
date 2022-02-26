@@ -18,6 +18,8 @@ namespace EduHome.Models.DbTables
 
         public List<TeacherHobby> TeacherHobbies { get; set; }
         public List<TeacherFaculty> TeacherFaculties { get; set; }
+        public List<Skill> Skills { get; set; }
+        public List<Contact> Contacts { get; set; }
 
     }
 }
