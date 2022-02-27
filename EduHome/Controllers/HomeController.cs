@@ -1,5 +1,7 @@
 ﻿using EduHome.Models;
+using EduHome.ViewModels;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
 using System;
 using System.Collections.Generic;
@@ -11,16 +13,24 @@ namespace EduHome.Controllers
 {
     public class HomeController : Controller
     {
-        private readonly ILogger<HomeController> _logger;
 
-        public HomeController(ILogger<HomeController> logger)
+        private readonly MyContext db;
+
+        public HomeController(MyContext context)
         {
-            _logger = logger;
+            db = context;
         }
 
-        public IActionResult Index()
+        public async Task<IActionResult> Index()
         {
-            return View();
+            HomeVM homeVM = new HomeVM()
+            {
+                Slider = db.Sliders.Include(Image=>Image.SliderImages).First(),
+                Notices = db.Notices.ToList(),
+                NoticeSeconds = db.NoticeSeconds.ToList()
+            };
+
+            return View(homeVM);
         }
 
         public IActionResult Privacy()
