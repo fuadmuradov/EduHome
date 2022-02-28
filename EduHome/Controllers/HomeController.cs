@@ -25,9 +25,10 @@ namespace EduHome.Controllers
         {
             HomeVM homeVM = new HomeVM()
             {
-                Slider = db.Sliders.Include(Image=>Image.SliderImages).First(),
-                Notices = db.Notices.ToList(),
-                NoticeSeconds = db.NoticeSeconds.ToList()
+                Slider = await db.Sliders.Include(Image => Image.SliderImages).FirstAsync(),
+                Notices = await db.Notices.ToListAsync(),
+                NoticeSeconds = await db.NoticeSeconds.ToListAsync(),
+                Events = await db.Events.ToListAsync()
             };
 
             return View(homeVM);

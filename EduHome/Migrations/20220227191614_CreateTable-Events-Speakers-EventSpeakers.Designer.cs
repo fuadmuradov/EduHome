@@ -4,51 +4,22 @@ using EduHome.Models;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace EduHome.Migrations
 {
     [DbContext(typeof(MyContext))]
-    partial class MyContextModelSnapshot : ModelSnapshot
+    [Migration("20220227191614_CreateTable-Events-Speakers-EventSpeakers")]
+    partial class CreateTableEventsSpeakersEventSpeakers
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
                 .UseIdentityColumns()
                 .HasAnnotation("Relational:MaxIdentifierLength", 128)
                 .HasAnnotation("ProductVersion", "5.0.0");
-
-            modelBuilder.Entity("EduHome.Models.DbTables.Blog", b =>
-                {
-                    b.Property<int>("id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .UseIdentityColumn();
-
-                    b.Property<string>("BlogImage")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<DateTime>("Date")
-                        .HasColumnType("datetime2");
-
-                    b.Property<string>("Description")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Title")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Writer")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("id");
-
-                    b.ToTable("Blogs");
-                });
 
             modelBuilder.Entity("EduHome.Models.DbTables.Category", b =>
                 {
@@ -63,40 +34,6 @@ namespace EduHome.Migrations
                     b.HasKey("id");
 
                     b.ToTable("Categories");
-                });
-
-            modelBuilder.Entity("EduHome.Models.DbTables.Comment", b =>
-                {
-                    b.Property<int>("id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .UseIdentityColumn();
-
-                    b.Property<int>("BlogId")
-                        .HasColumnType("int");
-
-                    b.Property<string>("Email")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Message")
-                        .HasMaxLength(1000)
-                        .HasColumnType("nvarchar(1000)");
-
-                    b.Property<string>("Name")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Subject")
-                        .IsRequired()
-                        .HasMaxLength(150)
-                        .HasColumnType("nvarchar(150)");
-
-                    b.HasKey("id");
-
-                    b.HasIndex("BlogId");
-
-                    b.ToTable("Comments");
                 });
 
             modelBuilder.Entity("EduHome.Models.DbTables.Compaign", b =>
@@ -240,16 +177,10 @@ namespace EduHome.Migrations
                         .HasColumnType("int")
                         .UseIdentityColumn();
 
-                    b.Property<DateTime>("Date")
-                        .HasColumnType("datetime2");
-
                     b.Property<int>("Day")
                         .HasColumnType("int");
 
                     b.Property<string>("Description")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Location")
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Month")
@@ -528,17 +459,6 @@ namespace EduHome.Migrations
                     b.ToTable("TeacherHobbies");
                 });
 
-            modelBuilder.Entity("EduHome.Models.DbTables.Comment", b =>
-                {
-                    b.HasOne("EduHome.Models.DbTables.Blog", "Blog")
-                        .WithMany("Comments")
-                        .HasForeignKey("BlogId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Blog");
-                });
-
             modelBuilder.Entity("EduHome.Models.DbTables.Compaign", b =>
                 {
                     b.HasOne("EduHome.Models.DbTables.Course", "Course")
@@ -660,11 +580,6 @@ namespace EduHome.Migrations
                     b.Navigation("Hobby");
 
                     b.Navigation("Teacher");
-                });
-
-            modelBuilder.Entity("EduHome.Models.DbTables.Blog", b =>
-                {
-                    b.Navigation("Comments");
                 });
 
             modelBuilder.Entity("EduHome.Models.DbTables.Category", b =>

@@ -11,6 +11,7 @@ namespace EduHome.ViewModels
         public Slider Slider { get; set; }
         public List<Notice> Notices { get; set; }
         public List<NoticeSecond> NoticeSeconds { get; set; }
+        public List<Event> Events { get; set; }
 
     }
 }
