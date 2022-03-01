@@ -28,7 +28,8 @@ namespace EduHome.Controllers
                 Slider = await db.Sliders.Include(Image => Image.SliderImages).FirstAsync(),
                 Notices = await db.Notices.ToListAsync(),
                 NoticeSeconds = await db.NoticeSeconds.ToListAsync(),
-                Events = await db.Events.ToListAsync()
+                Events = await db.Events.ToListAsync(),
+                Blogs = await db.Blogs.OrderByDescending(d=>d.Date).ToListAsync()
             };
 
             return View(homeVM);

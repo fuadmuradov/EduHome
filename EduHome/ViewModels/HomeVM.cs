@@ -12,6 +12,7 @@ namespace EduHome.ViewModels
         public List<Notice> Notices { get; set; }
         public List<NoticeSecond> NoticeSeconds { get; set; }
         public List<Event> Events { get; set; }
+        public List<Blog> Blogs { get; set; }
 
     }
 }

@@ -1,0 +1,151 @@
+﻿@model EduHome.Models.DbTables.Teacher
+
+@await Component.InvokeAsync("Header")
+
+    <!-- Banner Area Start -->
+    <div class="banner-area-wrapper">
+        <div class="banner-area text-center">
+            <div class="container">
+                <div class="row">
+                    <div class="col-xs-12">
+                        <div class="banner-content-wrapper">
+                            <div class="banner-content">
+                                <h2>teachers / details</h2>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Banner Area End -->
+    <!-- Teacher Start -->
+    <div class="teacher-details-area pt-150 pb-60">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-5 col-sm-5 col-xs-12">
+                    <div class="teacher-details-img">
+                        <img src="~/img/teacher/@Model.Image" alt="teacher">
+                    </div>
+                </div>
+                <div class="col-md-7 col-sm-7 col-xs-12">
+                    <div class="teacher-details-content ml-50">
+                        <h2>@Model.Name @Model.Surname</h2>
+                        <h5>@Model.Job</h5>
+                        <h4>about me</h4>
+                        <p>@Model.About </p>
+                        <ul>
+                            <li><span>degree: </span>@Model.Degree</li>
+                            <li><span>experience: </span>@Model.Experience years experience</li>
+                            <li><span>hobbies: </span>
+                            @foreach (var item in Model.TeacherHobbies)
+                            {
+                                string and = ", ";
+
+                                if (Model.TeacherHobbies.Max(x => x.id) == item.id) and = "";
+                                @(item.Hobby.Name+ and)
+                            }
+                            </li>
+                            <li>
+                                <span>faculty: </span>
+                                @foreach (var item in Model.TeacherFaculties)
+                                {
+                                    string and = ", ";
+
+                                    if (Model.TeacherFaculties.Max(x => x.id) == item.id) and = "";
+
+                                    @(item.Faculty.Name + and)
+                                }
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-3 col-sm-4">
+                    <div class="teacher-contact">
+                        <h4>contact information</h4>
+                        <p><span>mail me : </span>@Model.Contacts.FirstOrDefault(x => x.TeacherId == Model.id).Mail</p>
+                        <p><span>make a call : </span>(+125) @Model.Contacts.FirstOrDefault(x => x.TeacherId == Model.id).Phone</p>
+                        <p><span>skype : </span> @Model.Contacts.FirstOrDefault(x => x.TeacherId == Model.id).SkypeName</p>
+                        <ul>
+                            <li><a href="@Model.Contacts.FirstOrDefault(x=>x.TeacherId==Model.id).FacebookUrl"><i class="zmdi zmdi-facebook"></i></a></li>
+                            <li><a href="@Model.Contacts.FirstOrDefault(x=>x.TeacherId==Model.id).PinterestUrl"><i class="zmdi zmdi-pinterest"></i></a></li>
+                            <li><a href="@Model.Contacts.FirstOrDefault(x=>x.TeacherId==Model.id).SkypeUrl"><i class="zmdi zmdi-vimeo"></i></a></li>
+                            <li><a href="@Model.Contacts.FirstOrDefault(x=>x.TeacherId==Model.id).TwitterUrl"><i class="zmdi zmdi-twitter"></i></a></li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="col-md-9 col-sm-8">
+                    <div class="skill-area">
+                        <h4>skills</h4>
+                    </div>
+                    <div class="skill-wrapper">
+                        <div class="row">
+                            <div class="col-sm-4">
+                                <div class="skill-bar-item">
+                                    <span>language</span>
+                                    <div class="progress">
+                                        <div data-wow-delay="1.2s" data-wow-duration="1.5s" style="width: @(Model.Skills.FirstOrDefault(x => x.TeacherId == Model.id).Language)%; visibility: visible; animation-duration: 1.5s; animation-delay: 1.2s; animation-name: fadeInLeft;" data-progress="50%" class="progress-bar wow fadeInLeft">
+                                            <span class="text-top">@(Model.Skills.FirstOrDefault(x => x.TeacherId == Model.id).Language)%</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-sm-4">
+                                <div class="skill-bar-item">
+                                    <span>team leader</span>
+                                    <div class="progress">
+                                        <div data-wow-delay="1.2s" data-wow-duration="1.5s" style="width: @(Model.Skills.FirstOrDefault(x => x.TeacherId == Model.id).Leader)%; visibility: visible; animation-duration: 1.5s; animation-delay: 1.2s; animation-name: fadeInLeft;" data-progress="50%" class="progress-bar wow fadeInLeft">
+                                            <span class="text-top">@(Model.Skills.FirstOrDefault(x => x.TeacherId == Model.id).Leader)%</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-sm-4">
+                                <div class="skill-bar-item">
+                                    <span>development</span>
+                                    <div class="progress">
+                                        <div data-wow-delay="1.2s" data-wow-duration="1.5s" style="width: @(Model.Skills.FirstOrDefault(x => x.TeacherId == Model.id).Development)%; visibility: visible; animation-duration: 1.5s; animation-delay: 1.2s; animation-name: fadeInLeft;" data-progress="50%" class="progress-bar wow fadeInLeft">
+                                            <span class="text-top">@(Model.Skills.FirstOrDefault(x => x.TeacherId == Model.id).Development)%</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-sm-4">
+                                <div class="skill-bar-item">
+                                    <span>design</span>
+                                    <div class="progress">
+                                        <div data-wow-delay="1.2s" data-wow-duration="1.5s" style="width: @(Model.Skills.FirstOrDefault(x => x.TeacherId == Model.id).Design)%; visibility: visible; animation-duration: 1.5s; animation-delay: 1.2s; animation-name: fadeInLeft;" data-progress="50%" class="progress-bar wow fadeInLeft">
+                                            <span class="text-top">@(Model.Skills.FirstOrDefault(x => x.TeacherId == Model.id).Design)%</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-sm-4">
+                                <div class="skill-bar-item">
+                                    <span>innovation</span>
+                                    <div class="progress">
+                                        <div data-wow-delay="1.2s" data-wow-duration="1.5s" style="width: @(Model.Skills.FirstOrDefault(x => x.TeacherId == Model.id).Innovation)%; visibility: visible; animation-duration: 1.5s; animation-delay: 1.2s; animation-name: fadeInLeft;" data-progress="50%" class="progress-bar wow fadeInLeft">
+                                            <span class="text-top">@(Model.Skills.FirstOrDefault(x => x.TeacherId == Model.id).Innovation)%</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-sm-4">
+                                <div class="skill-bar-item">
+                                    <span>communication</span>
+                                    <div class="progress">
+                                        <div data-wow-delay="1.2s" data-wow-duration="1.5s" style="width: @(Model.Skills.FirstOrDefault(x => x.TeacherId == Model.id).Communication)%; visibility: visible; animation-duration: 1.5s; animation-delay: 1.2s; animation-name: fadeInLeft;" data-progress="50%" class="progress-bar wow fadeInLeft">
+                                            <span class="text-top">@(Model.Skills.FirstOrDefault(x => x.TeacherId == Model.id).Communication)%</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Teacher End -->

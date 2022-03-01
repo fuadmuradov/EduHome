@@ -23,5 +23,14 @@ namespace EduHome.Controllers
            List<EduHome.Models.DbTables.Teacher> teacher =  db.Teachers.Include(c=>c.Contacts).ToList();
             return View(teacher);
         }
+
+
+        public async Task<IActionResult> TeacherDetails(int? id)
+        {
+            Models.DbTables.Teacher teacher = await db.Teachers.Include(c => c.Contacts).Include(s=>s.Skills).Include(f=>f.TeacherFaculties).ThenInclude(fc=>fc.Faculty).Include(hb=>hb.TeacherHobbies).ThenInclude(h=>h.Hobby).FirstOrDefaultAsync(x=>x.id==id);
+
+            return View(teacher);
+        }
+
     }
 }
