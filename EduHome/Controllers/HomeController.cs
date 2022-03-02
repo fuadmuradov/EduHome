@@ -35,6 +35,34 @@ namespace EduHome.Controllers
             return View(homeVM);
         }
 
+
+        public async Task<IActionResult> About()
+        {
+            AboutVM about = new AboutVM
+            {
+                About = await db.Abouts.FirstAsync(),
+                Teachers = await db.Teachers.Include(c=>c.Contacts).ToListAsync(),
+                Testimional = await db.Testimionals.FirstAsync(),
+                Notices = await db.Notices.ToListAsync()
+            };
+
+
+            return View(about);
+        }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
         public IActionResult Privacy()
         {
             return View();

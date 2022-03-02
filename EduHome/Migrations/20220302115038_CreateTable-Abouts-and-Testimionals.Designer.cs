@@ -4,14 +4,16 @@ using EduHome.Models;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace EduHome.Migrations
 {
     [DbContext(typeof(MyContext))]
-    partial class MyContextModelSnapshot : ModelSnapshot
+    [Migration("20220302115038_CreateTable-Abouts-and-Testimionals")]
+    partial class CreateTableAboutsandTestimionals
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -27,9 +29,6 @@ namespace EduHome.Migrations
                         .UseIdentityColumn();
 
                     b.Property<string>("Description")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Image")
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Title")
@@ -555,9 +554,6 @@ namespace EduHome.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int")
                         .UseIdentityColumn();
-
-                    b.Property<string>("Description")
-                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Fullname")
                         .HasColumnType("nvarchar(max)");
