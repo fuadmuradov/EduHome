@@ -27,6 +27,8 @@ namespace EduHome.Controllers
 
         public async Task<IActionResult> TeacherDetails(int? id)
         {
+            if (id == null) id = db.Teachers.First().id;
+
             Models.DbTables.Teacher teacher = await db.Teachers.Include(c => c.Contacts).Include(s=>s.Skills).Include(f=>f.TeacherFaculties).ThenInclude(fc=>fc.Faculty).Include(hb=>hb.TeacherHobbies).ThenInclude(h=>h.Hobby).FirstOrDefaultAsync(x=>x.id==id);
 
             return View(teacher);

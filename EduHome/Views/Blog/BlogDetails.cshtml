@@ -1,7 +1,8 @@
-﻿@model Course
+﻿	
+@model Blog
 
-@await Component.InvokeAsync("Header") 
-<!-- Banner Area Start -->
+@await Component.InvokeAsync("Header")
+	<!-- Banner Area Start -->
 <div class="banner-area-wrapper">
     <div class="banner-area text-center">
         <div class="container">
@@ -9,7 +10,7 @@
                 <div class="col-xs-12">
                     <div class="banner-content-wrapper">
                         <div class="banner-content">
-                            <h2>courses details</h2>
+                            <h2>blog details</h2>
                         </div>
                     </div>
                 </div>
@@ -19,45 +20,22 @@
 </div>
 <!-- Banner Area End -->
 <!-- Blog Start -->
-<div class="courses-details-area blog-area pt-150 pb-140">
+<div class="blog-details-area pt-150 pb-140">
     <div class="container">
         <div class="row">
             <div class="col-md-8">
-                <div class="courses-details">
-                    <div class="courses-details-img">
-                        <img src="~/img/course/@Model.Image" style="width:770px; height:411px" alt="courses-details">
+                <div class="blog-details">
+                    <div class="blog-details-img">
+                        <img src="~/img/blog/@Model.BlogImage" alt="blog-details">
                     </div>
-                    <div class="course-details-content">
-                        <h2>@Model.Name</h2>
-                        <p>@Model.Description </p>
-                        <div class="course-details-left">
-                            <div class="single-course-left">
-                                <h3>about course</h3>
-                                <p>@Model.About</p>
-                            </div>
-                            <div class="single-course-left">
-                                <h3>how to apply</h3>
-                                <p>@Model.Apply</p>
-                            </div>
-                            <div class="single-course-left">
-                                <h3>certification</h3>
-                                <p class="margin">@Model.Certification</p>
-                            </div>
-                        </div>
-                        <div class="course-details-right">
-                            <h3>COURSE FEATURES</h3>
-                            <ul>
-                                <li>starts <span>@Model.CourseFeatures.FirstOrDefault(x=>x.CourseId==Model.id).StartDate.ToString("dd MMMM, yyyy")</span></li>
-                                <li>duration <span>@Model.CourseFeatures.FirstOrDefault(x => x.CourseId == Model.id).Duration Month</span></li>
-                                <li>class duration <span>@Model.CourseFeatures.FirstOrDefault(x => x.CourseId == Model.id).ClassDuration hours</span></li>
-                                <li>skill level <span>@Model.CourseFeatures.FirstOrDefault(x => x.CourseId == Model.id).SkilLevel level</span></li>
-                                <li>language <span>@Model.CourseFeatures.FirstOrDefault(x => x.CourseId == Model.id).Language</span></li>
-                                <li>students <span>@Model.CourseFeatures.FirstOrDefault(x => x.CourseId == Model.id).StudentCount</span></li>
-                                <li>assesments <span>@Model.CourseFeatures.FirstOrDefault(x => x.CourseId == Model.id).Assesment</span></li>
-                            </ul>
-                            <h3 class="red">course fee $@Model.CourseFeatures.FirstOrDefault(x => x.CourseId == Model.id).Price</h3>
-                        </div>
+                    <div class="blog-details-content">
+                        <h2>@Model.Title </h2>
+                        <h6>By @Model.Writer / @Model.Date.ToString("MMMM d, yyyy") / <i class="fa fa-comments-o"></i> 4</h6>
+                    
+                        <p>@Model.Description</p>
                     </div>
+
+
                     <div class="reply-area">
                         <h3>LEAVE A REPLY</h3>
                         <p>I must explain to you how all this a mistaken idea of ncing great explorer of the rut<br> the is lder of human happinescias unde omnis iste natus error sit volptatem </p>
@@ -86,7 +64,7 @@
             </div>
             <div class="col-md-4">
                 <div class="blog-sidebar right">
-                    <div class="single-blog-widget mb-50">
+                    <div class="single-blog-widget mb-47">
                         <h3>search</h3>
                         <div class="blog-search">
                             <form id="search" action="#">
@@ -97,15 +75,17 @@
                             </form>
                         </div>
                     </div>
-                    @await Component.InvokeAsync("Category");
-
-                    <div class="single-blog-widget mb-50">
+                  @await Component.InvokeAsync("Category") 
+                    <div class="single-blog-widget mb-47">
                         <div class="single-blog-banner">
                             <a href="blog-details.html" id="blog"><img src="~/img/blog/blog-img.jpg" alt="blog"></a>
                             <h2>best<br> eductaion<br> theme</h2>
                         </div>
                     </div>
-                    @await Component.InvokeAsync("LatestBlog")
+                    <div class="single-blog-widget mb-47">
+                        @await Component.InvokeAsync("LatestBlog")
+
+                    </div>
                     <div class="single-blog-widget">
                         <h3>tags</h3>
                         <div class="single-tag">

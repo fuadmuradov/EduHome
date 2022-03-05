@@ -25,12 +25,9 @@ namespace EduHome.Controllers
 
         public async Task<IActionResult> EventDetails(int ? id)
         {
-            if (id == null)
-            {
-                return NotFound();
-            }
+            if (id == null) id = db.Events.First().id;
 
-            Models.DbTables.Event dbevent = await db.Events.FirstOrDefaultAsync(x => x.id == id);
+            Models.DbTables.Event dbevent = await db.Events.Include(sp=>sp.EventSpeakers).ThenInclude(spk=>spk.Speaker).FirstOrDefaultAsync(x => x.id == id);
 
             if (dbevent == null)
             {
