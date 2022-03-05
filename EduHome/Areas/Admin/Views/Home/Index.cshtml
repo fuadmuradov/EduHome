@@ -1,0 +1,100 @@
+﻿@model Slider
+@{
+    ViewData["Title"] = "Index";
+}
+
+
+<div class="body-content">
+    <div class="container">
+        <div class="row">
+
+            <div class="col-md-12 col-lg-12">
+                <div class="card center-block mb-5" style="width:50rem;">
+                    <div class="card-body">
+                        <form method="post">
+                            <div class="form-group">
+                                <label asp-for="@Model.Title" class="font-weight-600">Slider Title</label>
+                                <input asp-for="@Model.Title" class="form-control" id="exampleFormControlInput1" placeholder="Slider Title">
+                            </div>
+                            <div class="form-group">
+                                <label asp-for="@Model.Description" class="font-weight-600">Slider Description</label>
+                                <input asp-for="@Model.Description" class="form-control" id="exampleFormControlInput1" placeholder="Slider Description">
+                            </div>
+                            <button type="submit" class="btn btn-success" onclick="return confirm('Are you sure you want to Update?')">Update</button>
+                            <a class="mr-4 btn btn-success-soft" asp-area="admin" asp-action="Create" asp-controller="Home">Create Slider Image</a>
+                        </form>
+                    </div>
+                </div>
+
+
+
+
+            </div>
+        </div>
+        
+        <div class="row justify-content-center">
+            
+
+            @foreach (var item in Model.SliderImages)
+            {
+                <div class="card mr-2 ml-2" style="width: 18rem;">
+                    <div style="width:270px; height:175px">
+                        <img src="~/img/slider/@item.Image" class="card-img-top" alt="Slider Image">
+                    </div>
+                    <div class="card-body center-block">
+                        <div>
+                            <h5 class="card-title"> <i>Queue: <strong>@item.LineOrdeer</strong></i> </h5>
+                        </div>
+                        <a asp-area="Admin" asp-controller="Home" asp-action="Delete" asp-route-id="@item.id" class="btn btn-danger-soft btn-sm" onclick="return confirm('Are you sure you want to delete?')"><i class="far fa-trash-alt"></i></a>
+                        <a asp-area="Admin" asp-controller="Home" asp-action="Edit" asp-route-id="@item.id" class="btn btn-success-soft btn-sm ml-1"><i class="far fa-edit"></i></a>
+                    </div>
+                </div>
+            }
+
+            @*<div class="card mr-2 ml-2" style="width: 18rem;">
+            <img src="..." class="card-img-top" alt="...">
+            <div class="card-body">
+                <h5 class="card-title">Card title</h5>
+                <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+            </div>
+            <div class="card-body">
+                <a href="#" class="card-link">Card link</a>
+                <a href="#" class="card-link">Another link</a>
+            </div>
+        </div>
+        <div class="card mr-2 ml-2" style="width: 18rem;">
+            <img src="..." class="card-img-top" alt="...">
+            <div class="card-body">
+                <h5 class="card-title">Card title</h5>
+                <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+            </div>
+
+            <div class="card-body">
+                <a href="#" class="card-link">Card link</a>
+                <a href="#" class="card-link">Another link</a>
+            </div>
+        </div>
+        <div class="card mr-2 ml-2" style="width: 18rem;">
+            <img src="..." class="card-img-top" alt="...">
+            <div class="card-body">
+                <h5 class="card-title">Card title</h5>
+                <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+            </div>
+
+            <div class="card-body">
+                <a href="#" class="card-link">Card link</a>
+                <a href="#" class="card-link">Another link</a>
+            </div>
+        </div>*@
+
+        </div>
+    </div>
+
+</div>
+
+
+
+@section Script{
+
+    <script src="assets/dist/js/pages/forms-basic.active.js"></script>
+}

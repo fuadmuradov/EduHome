@@ -45,19 +45,19 @@
                                     </li>
                                     <li><a asp-controller="Home" asp-action="About">About</a></li>
                                     <li>
-                                        <a href="course.html">courses</a>
+                                        <a asp-controller="Course" asp-action="Courses">courses</a>
                                         <ul>
-                                            <li><a href="course.html">courses</a></li>
-                                            <li><a href="course-details.html">courses details</a></li>
+                                            <li><a asp-controller="Course" asp-action="Courses">courses</a></li>
+                                            <li><a asp-controller="Course" asp-action="CourseDetails">courses details</a></li>
                                         </ul>
                                     </li>
                                     <li>
-                                        <a href="event.html">event</a>
+                                        <a asp-controller="Event" asp-action="EventHome">event</a>
                                         <ul>
-                                            <li><a href="event.html">event</a></li>
-                                            <li><a href="event-left-side-bar.html">event left sidebar</a></li>
-                                            <li><a href="event-right-side-bar.html">event right sidebar</a></li>
-                                            <li><a href="event-details.html">event details</a></li>
+                                            <li><a asp-controller="Event" asp-action="EventHome">event</a></li>
+                                            <li><a asp-controller="Event" asp-action="EventHome">event left sidebar</a></li>
+                                            <li><a asp-controller="Event" asp-action="EventHome">event right sidebar</a></li>
+                                            <li><a asp-controller="Event" asp-action="EventDetails">event details</a></li>
                                         </ul>
                                     </li>
                                     <li class="hidden-sm">
@@ -68,15 +68,15 @@
                                         </ul>
                                     </li>
                                     <li>
-                                        <a href="blog.html">blog</a>
+                                        <a asp-controller="Blog" asp-action="Blogs">blog</a>
                                         <ul>
-                                            <li><a href="blog.html">blog</a></li>
+                                            <li><a asp-controller="Blog" asp-action="Blogs">blog</a></li>
                                             <li><a href="blog-left-side-bar.html">blog left sidebar</a></li>
                                             <li><a href="blog-right-side-bar.html">blog righ sidebar</a></li>
-                                            <li><a href="blog-details.html">blog details</a></li>
+                                            <li><a asp-controller="Blog" asp-action="BlogDetails">blog details</a></li>
                                         </ul>
                                     </li>
-                                    <li><a href="contact.html">Contact</a></li>
+                                    <li><a asp-controller="Contact" asp-action="Contacts">Contact</a></li>
                                     <li><a href="#">Buy Now</a>
                                 </ul>
                             </nav>

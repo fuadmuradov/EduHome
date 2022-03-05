@@ -29,7 +29,8 @@ namespace EduHome.Controllers
                 Notices = await db.Notices.ToListAsync(),
                 NoticeSeconds = await db.NoticeSeconds.ToListAsync(),
                 Events = await db.Events.ToListAsync(),
-                Blogs = await db.Blogs.OrderByDescending(d=>d.Date).ToListAsync()
+                Blogs = await db.Blogs.OrderByDescending(d => d.Date).ToListAsync(),
+                Courses = await db.Courses.OrderByDescending(d=>d.id).ToListAsync()
             };
 
             return View(homeVM);

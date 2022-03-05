@@ -17,20 +17,13 @@
                                 <ul>
                                     <li>
                                         <a asp-controller="Home" asp-action="Index">Home</a>
-                                        <ul>
-                                            <li><a asp-controller="Home" asp-action="Index">Home One</a></li>
-                                            <li><a href="index-2.html">Home Two</a></li>
-                                            <li><a href="index-3.html">Home Three</a></li>
-                                            <li><a href="index-4.html">Home Four</a></li>
-                                            <li><a href="index-5.html">Home Five</a></li>
-                                        </ul>
                                     </li>
                                     <li><a asp-controller="Home" asp-action="About">About</a></li>
                                     <li>
-                                        <a href="course.html">courses</a>
+                                        <a asp-controller="Course" asp-action="Courses">courses</a>
                                         <ul>
-                                            <li><a href="course.html">courses</a></li>
-                                            <li><a href="course-details.html">courses details</a></li>
+                                            <li><a asp-controller="Course" asp-action="Courses">courses</a></li>
+                                            <li><a asp-controller="Course" asp-action="CourseDetails">courses details</a></li>
                                         </ul>
                                     </li>
                                     <li>
@@ -50,15 +43,15 @@
                                         </ul>
                                     </li>
                                     <li>
-                                        <a href="blog.html">blog</a>
+                                        <a asp-controller="Blog" asp-action="Blogs">blog</a>
                                         <ul>
-                                            <li><a href="blog.html">blog</a></li>
+                                            <li><a asp-controller="Blog" asp-action="Blogs">blog</a></li>
                                             <li><a href="blog-left-side-bar.html">blog left sidebar</a></li>
                                             <li><a href="blog-right-side-bar.html">blog righ sidebar</a></li>
-                                            <li><a href="blog-details.html">blog details</a></li>
+                                            <li><a asp-controller="Blog" asp-action="BlogDetails">blog details</a></li>
                                         </ul>
                                     </li>
-                                    <li><a href="contact.html">Contact</a></li>
+                                    <li><a asp-controller="Contact" asp-action="Contacts">Contact</a></li>
                                     <li><a href="#">Buy Now</a>
                                 </ul>
                             </nav>
@@ -170,57 +163,27 @@
             </div>
         </div>
         <div class="row">
-            <div class="col-md-4 col-sm-6 col-xs-12">
-                <div class="single-course">
-                    <div class="course-img">
-                        <a href="course-details.html">
-                            <img src="~/img/course/course1.jpg" alt="course">
-                            <div class="course-hover">
-                                <i class="fa fa-link"></i>
-                            </div>
-                        </a>
-                    </div>
-                    <div class="course-content">
-                        <h3><a href="course-details.html">CSE ENGINEERING</a></h3>
-                        <p>I must explain to you how all this a mistaken idea of denouncing great explorer of the rut the is lder of human happiness</p>
-                        <a class="default-btn" href="course-details.html">read more</a>
-                    </div>
-                </div>
-            </div>
-            <div class="col-md-4 col-sm-6 col-xs-12">
-                <div class="single-course">
-                    <div class="course-img">
-                        <a href="course-details.html">
-                            <img src="~/img/course/course2.jpg" alt="course">
-                            <div class="course-hover">
-                                <i class="fa fa-link"></i>
-                            </div>
-                        </a>
-                    </div>
-                    <div class="course-content">
-                        <h3><a href="course-details.html">CSE ENGINEERING</a></h3>
-                        <p>I must explain to you how all this a mistaken idea of denouncing great explorer of the rut the is lder of human happiness</p>
-                        <a class="default-btn" href="course-details.html">read more</a>
+            @for (int i = 0; i < 3; i++)
+            {
+                <div class="col-md-4 col-sm-6 col-xs-12">
+                    <div class="single-course">
+                        <div class="course-img">
+                            <a asp-controller="Course" asp-action="CourseDetails" asp-route-id="@Model.Courses[i].id">
+                                <img src="~/img/course/@Model.Courses[i].Image" alt="course">
+                                <div class="course-hover">
+                                    <i class="fa fa-link"></i>
+                                </div>
+                            </a>
+                        </div>
+                        <div class="course-content">
+                            <h3><a asp-controller="Course" asp-action="CourseDetails" asp-route-id="@Model.Courses[i].id">@Model.Courses[i].Name</a></h3>
+                            <p>@Model.Courses[i].Description</p>
+                            <a class="default-btn" asp-controller="Course" asp-action="CourseDetails" asp-route-id="@Model.Courses[i].id">read more</a>
+                        </div>
                     </div>
                 </div>
-            </div>
-            <div class="col-md-4 hidden-sm col-xs-12">
-                <div class="single-course">
-                    <div class="course-img">
-                        <a href="course-details.html">
-                            <img src="~/img/course/course3.jpg" alt="course">
-                            <div class="course-hover">
-                                <i class="fa fa-link"></i>
-                            </div>
-                        </a>
-                    </div>
-                    <div class="course-content">
-                        <h3><a href="course-details.html">CSE ENGINEERING</a></h3>
-                        <p>I must explain to you how all this a mistaken idea of denouncing great explorer of the rut the is lder of human happiness</p>
-                        <a class="default-btn" href="course-details.html">read more</a>
-                    </div>
-                </div>
-            </div>
+            }
+            
         </div>
     </div>
 </div>
@@ -244,18 +207,18 @@
 
                     <div class="single-event mb-35">
                         <div class="event-date">
-                            <h3><a href="event-details.html">@Model.Events[i].Day <span>@Model.Events[i].Month</span></a></h3>
+                            <h3><a asp-controller="Event" asp-action="EventDetails" asp-route-id="@Model.Events[i].id">@Model.Events[i].Day <span>@Model.Events[i].Month</span></a></h3>
                         </div>
                         <div class="event-content text-left">
                             <div class="event-content-left">
-                                <h4><a href="event-details.html">@Model.Events[i].Title</a></h4>
+                                <h4><a asp-controller="Event" asp-action="EventDetails" asp-route-id="@Model.Events[i].id">@Model.Events[i].Title</a></h4>
                                 <ul>
                                     <li><i class="fa fa-clock-o"></i>@Model.Events[i].Date.ToString("hh:mm")</li>
                                     <li><i class="fa fa-map-marker"></i>@Model.Events[i].Location</li>
                                 </ul>
                             </div>
                             <div class="event-content-right">
-                                <a class="default-btn" href="event-details.html">join now</a>
+                                <a class="default-btn" asp-controller="Event" asp-action="EventDetails" asp-route-id="@Model.Events[i].id">join now</a>
                             </div>
                         </div>
                     </div>
@@ -275,18 +238,18 @@
 
                     <div class="single-event mb-35">
                         <div class="event-date">
-                            <h3><a href="event-details.html">@Model.Events[i].Day <span>@Model.Events[i].Month</span></a></h3>
+                            <h3><a asp-controller="Event" asp-action="EventDetails" asp-route-id="@Model.Events[i].id">@Model.Events[i].Day <span>@Model.Events[i].Month</span></a></h3>
                         </div>
                         <div class="event-content text-left">
                             <div class="event-content-left">
-                                <h4><a href="event-details.html">@Model.Events[i].Title</a></h4>
+                                <h4><a asp-controller="Event" asp-action="EventDetails" asp-route-id="@Model.Events[i].id">@Model.Events[i].Title</a></h4>
                                 <ul>
                                     <li><i class="fa fa-clock-o"></i>@Model.Events[i].Date.ToString("hh:mm")</li>
                                     <li><i class="fa fa-map-marker"></i>@Model.Events[i].Location</li>
                                 </ul>
                             </div>
                             <div class="event-content-right">
-                                <a class="default-btn" href="event-details.html">join now</a>
+                                <a class="default-btn" asp-controller="Event" asp-action="EventDetails" asp-route-id="@Model.Events[i].id">join now</a>
                             </div>
                         </div>
                     </div>

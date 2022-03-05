@@ -1,0 +1,22 @@
+﻿@model SliderImage
+
+<div class="card center-block mb-5" style="width:50rem;">
+    <div class="card-body">
+        <form method="post" enctype="multipart/form-data">
+            <div asp-validation-summary="ModelOnly"></div>
+            <div class="card-body">
+                <div class="form-group">
+                    <label class="font-weight-600"></label>
+                    <input type="file" class="form-control" asp-for="Photo"><br />
+                    <span asp-validation-for="Photo"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="LineOrdeer" class="font-weight-600"></label>
+                    <input asp-for="LineOrdeer" class="form-control">
+                </div>
+              
+            </div>
+            <button type="submit" class="btn btn-success ml-4">Create</button>
+        </form>
+    </div>
+</div>

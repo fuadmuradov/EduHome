@@ -375,6 +375,39 @@ namespace EduHome.Migrations
                     b.ToTable("NoticeSeconds");
                 });
 
+            modelBuilder.Entity("EduHome.Models.DbTables.Setting", b =>
+                {
+                    b.Property<int>("id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .UseIdentityColumn();
+
+                    b.Property<string>("Address")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Description")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Logo")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Mail")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("WebSite")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("phone1")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("phone2")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("id");
+
+                    b.ToTable("Settings");
+                });
+
             modelBuilder.Entity("EduHome.Models.DbTables.Skill", b =>
                 {
                     b.Property<int>("id")

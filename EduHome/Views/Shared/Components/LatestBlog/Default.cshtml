@@ -1,0 +1,31 @@
+﻿@model List<Blog>
+
+@*<div class="single-blog-widget mb-50">
+    <div class="single-blog-banner">
+        <a href="blog-details.html" id="blog"><img src="img/blog/blog-img.jpg" alt="blog"></a>
+        <h2>best<br> eductaion<br> theme</h2>
+    </div>
+</div>*@
+<div class="single-blog-widget mb-50">
+    <h3>latest post</h3>
+
+    @for (int i = 0; i < 3; i++)
+    {
+        <div class="single-post mb-30">
+            <div class="single-post-img">
+                <a href="blog-details.html">
+                    <img src="~/img/blog/@Model[i].BlogImage" style="width:75px; height:60px" alt="post">
+                    <div class="blog-hover">
+                        <i class="fa fa-link"></i>
+                    </div>
+                </a>
+            </div>
+            <div class="single-post-content">
+                <h4><a href="blog-details.html">@Model[i].Title</a></h4>
+                <p>By @Model[i].Writer  /  @Model[i].Date.ToString("MMMM d, yyyy")</p>
+            </div>
+        </div>
+    }
+
+    
+</div>

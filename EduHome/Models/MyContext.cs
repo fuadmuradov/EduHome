@@ -36,5 +36,7 @@ namespace EduHome.Models
 
         public DbSet<About> Abouts { get; set; }
         public DbSet<Testimional> Testimionals { get; set; }
+
+        public DbSet<Setting> Settings { get; set; }
     }
 }
