@@ -141,5 +141,191 @@ namespace EduHome.Areas.Admin.Controllers
 
         #endregion
 
+        #region Notice
+
+        public IActionResult Notice(int page =1)
+        {
+            ViewBag.NoticeSecond = context.NoticeSeconds.ToList();
+
+            ViewBag.CurrentPage = page;
+            ViewBag.TotalPage = Math.Ceiling((decimal)context.Notices.Count() / 3);
+
+            List<Notice> notices = context.Notices.Skip((page - 1) * 3).Take(3).ToList();
+
+
+            return View(notices);
+        }
+
+        public IActionResult CreateNotice()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> CreateNotice(Notice notice)
+        {
+            if (!ModelState.IsValid) return View();
+            context.Notices.Add(notice);
+            await context.SaveChangesAsync();
+
+            return LocalRedirect("/Admin/Home/Notice");
+        }
+
+        public IActionResult EditNotice(int id)
+        {
+            Notice notice = context.Notices.FirstOrDefault(x=>x.id==id);
+            if (notice == null) return NotFound();
+
+
+            return View(notice);
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> EditNotice(Notice notice)
+        {
+            if (!ModelState.IsValid) return View();
+            Notice existnotice = await context.Notices.FirstOrDefaultAsync(x => x.id == notice.id);
+            if (existnotice == null) return NotFound();
+
+            existnotice.Title = notice.Title;
+            existnotice.Description = notice.Description;
+            await context.SaveChangesAsync();
+
+            return LocalRedirect("/Admin/Home/Notice");
+        }
+
+        public async Task<IActionResult> DeleteNotice(int id)
+        {
+            Notice existnotice = await context.Notices.FirstOrDefaultAsync(x=>x.id==id);
+            if (existnotice == null) return NotFound();
+            context.Notices.Remove(existnotice);
+             await context.SaveChangesAsync();
+
+            return LocalRedirect("/Admin/Home/Notice");
+        }
+
+        #endregion
+
+
+        //******************************* Notice Second ************************************
+
+
+        #region NoticeSecond
+
+        public IActionResult NoticeSecond(int page = 1)
+        {
+            ViewBag.CurrentPage = page;
+            ViewBag.TotalPage = Math.Ceiling((decimal)context.NoticeSeconds.Count() / 3);
+
+            List<NoticeSecond> noticeseconds = context.NoticeSeconds.Skip((page - 1) * 3).Take(3).ToList();
+
+
+            return View(noticeseconds);
+        }
+
+        public IActionResult CreateNoticeSecond()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> CreateNoticeSecond(NoticeSecond notice)
+        {
+            if (!ModelState.IsValid) return View();
+            context.NoticeSeconds.Add(notice);
+            await context.SaveChangesAsync();
+
+            return LocalRedirect("/Admin/Home/NoticeSecond");
+        }
+
+        public IActionResult EditNoticeSecond(int id)
+        {
+            NoticeSecond notice = context.NoticeSeconds.FirstOrDefault(x => x.id == id);
+            if (notice == null) return NotFound();
+
+
+            return View(notice);
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> EditNoticeSecond(NoticeSecond notice)
+        {
+            if (!ModelState.IsValid) return View();
+            NoticeSecond existnotice = await context.NoticeSeconds.FirstOrDefaultAsync(x => x.id == notice.id);
+            if (existnotice == null) return NotFound();
+
+            existnotice.Title = notice.Title;
+            existnotice.Description = notice.Description;
+            await context.SaveChangesAsync();
+
+            return LocalRedirect("/Admin/Home/NoticeSecond");
+        }
+
+        public async Task<IActionResult> DeleteNoticeSecond(int id)
+        {
+            NoticeSecond existnotice = await context.NoticeSeconds.FirstOrDefaultAsync(x => x.id == id);
+            if (existnotice == null) return NotFound();
+            context.NoticeSeconds.Remove(existnotice);
+            await context.SaveChangesAsync();
+
+            return LocalRedirect("/Admin/Home/NoticeSecond");
+        }
+
+
+        #endregion
+
+        #region About
+
+        public IActionResult About()
+        {
+            About about = context.Abouts.FirstOrDefault();
+            if (about == null) return NotFound();
+            return View(about);
+        }
+
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> About(About about)
+        {
+            if (!ModelState.IsValid)
+            {
+                return View(about);
+            }
+
+            About existAbout = await context.Abouts.FirstAsync();
+
+            if (about.Photo != null)
+            {
+                try
+                {
+                    string folder = @"img\about\";
+                    string newImg = await about.Photo.SavaAsync(webHost.WebRootPath, folder);
+                    FileExtension.Delete(webHost.WebRootPath, folder, existAbout.Image);
+                    existAbout.Image = newImg;
+                }
+                catch (Exception e)
+                {
+                    ModelState.AddModelError("", "unexpected error for Update");
+                    return View();
+                }
+
+            }
+            existAbout.Title = about.Title;
+            existAbout.Description = about.Description;
+            await context.SaveChangesAsync();
+
+
+            return LocalRedirect("/Admin/Home/About");
+        }
+
+
+        #endregion
+
+
     }
 }

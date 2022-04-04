@@ -1,0 +1,47 @@
+﻿@model List<NoticeSecond>
+
+
+
+<div class="container">
+    <div class="row justify-content-center">
+        <a class="btn btn-success-soft" asp-area="Admin" asp-action="CreateNoticeSecond" asp-controller="Home" style="width:800px">Create Notices</a>
+    </div>
+    <div class="row justify-content-center">
+        @foreach (var item in Model)
+        {
+            <div class="card ml-2 mt-3 mr-2" style="width: 18rem;">
+                <div class="card-body">
+                    <h5 class="card-title">@item.Title</h5>
+                    <h6 class="card-subtitle mb-2 text-muted">Notice</h6>
+                    <p class="card-text">@item.Description</p>
+                    <a asp-area="Admin" asp-controller="Home" asp-action="DeleteNoticeSecond" asp-route-id="@item.id" class="btn btn-danger-soft btn-sm" onclick="return confirm('Are you sure you want to delete?')"><i class="far fa-trash-alt"></i></a>
+                    <a asp-area="Admin" asp-controller="Home" asp-action="EditNoticeSecond" asp-route-id="@item.id" class="btn btn-success-soft btn-sm ml-1"><i class="far fa-edit"></i></a>
+                </div>
+            </div>
+        }
+
+
+    </div>
+
+</div>
+
+<div class="container mt-7">
+    <div class="row justify-content-center">
+        <nav aria-label="...">
+            <ul class="pagination mt-5" style="justify-content:center">
+                <li class="page-item @(ViewBag.CurrentPage==1 ? "disabled" : "")">
+                    <a class="page-link" asp-area="admin" asp-controller="Home" asp-action="NoticeSecond" asp-route-page="@(ViewBag.CurrentPage-1)">Previous</a>
+                </li>
+                @for (int i = 1; i <= ViewBag.TotalPage; i++)
+                {
+                    <li class="page-item @(ViewBag.CurrentPage==i ? "active":"")" style="@(ViewBag .CurrentPage==i ? "pointer-events:none":"")" aria-current="page">
+                        <a class="page-link" asp-area="admin" asp-controller="Home" asp-action="NoticeSecond" asp-route-page="@i">@i</a>
+                    </li>
+                }
+                <li class="page-item @(ViewBag.CurrentPage==ViewBag.TotalPage ? "disabled" : "")">
+                    <a class="page-link" href="#">Next</a>
+                </li>
+            </ul>
+        </nav>
+    </div>
+</div>
