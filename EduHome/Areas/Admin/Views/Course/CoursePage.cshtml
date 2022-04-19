@@ -29,23 +29,25 @@
 
         </div>*@
         <div class="row justify-content-center">
-            <a class="btn btn-success-soft" asp-area="Admin" asp-action="CreateCourse" asp-controller="Course" style="width:800px">Create Notices</a>
+            <a class="btn btn-success-soft" asp-area="Admin" asp-action="CreateCourse" asp-controller="Course" style="width:800px">Create Cource</a>
         </div>
         <div class="row justify-content-center">
 
             @foreach (var item in Model)
             {
                 <div class="card mr-2 ml-2" style="width: 22rem;">
-                    <div class="mt-2" style="width:325px; height:210px">
+                    <div class="mt-2" style="width:300px; height:210px">
                         <img src="~/img/course/@item.Image" class="card-img-top" alt="Course Image">
                     </div>
-                    <div class="card-body center-block">
+                    <div class="card-body center-block mt-2">
                         <div>
-                            <h5 class="card-title"> <strong>@item.Name</strong> </h5>
-                            <h6>@item.Description</h6>
+                            <h5 class="card-title"> <strong> @(item.Name.Length<30 ? item.Name:item.Name.Substring(30)+"...")</strong> </h5>
+
+                            <h6>@(item.Description.Length<142 ? item.Description:item.Description.Substring(142 )+"...")</h6>
                         </div>
-                        <a asp-area="Admin" asp-controller="Home" asp-action="DeleteCourse" asp-route-id="@item.id" class="btn btn-danger-soft btn-sm" onclick="return confirm('Are you sure you want to delete?')"><i class="far fa-trash-alt"></i></a>
-                        <a asp-area="Admin" asp-controller="Home" asp-action="Edit" asp-route-id="@item.id" class="btn btn-success-soft btn-sm ml-1"><i class="far fa-edit"></i></a>
+                        <a asp-area="Admin" asp-controller="Course" asp-action="DeleteCourse" asp-route-id="@item.id" class="btn btn-danger-soft btn-sm" onclick="return confirm('Are you sure you want to delete?')"><i class="far fa-trash-alt"></i></a>
+                        <a asp-area="Admin" asp-controller="Course" asp-action="UpdateCourse" asp-route-id="@item.id" class="btn btn-success-soft btn-sm ml-1"><i class="far fa-edit"></i></a>
+                        <a asp-area="Admin" asp-controller="Course" asp-action="UpdateFeature" asp-route-id="@item.id" class="btn btn-success-soft btn-sm ml-1"><i class="far fa-edit"></i> Feature</a>
                     </div>
                 </div>
             }
