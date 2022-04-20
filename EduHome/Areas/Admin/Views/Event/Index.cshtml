@@ -1,8 +1,8 @@
-﻿@model List<Course>
+﻿@model List<Event>
 <div class="body-content">
     <div class="container">
         <div class="row justify-content-center">
-            <a class="btn btn-success-soft" asp-area="Admin" asp-action="CreateCourse" asp-controller="Course" style="width:800px">Create Cource</a>
+            <a class="btn btn-success-soft" asp-area="Admin" asp-action="CreateEvent" asp-controller="Event" style="width:800px">Create Event</a>
         </div>
         <div class="row justify-content-center">
 
@@ -10,16 +10,16 @@
             {
                 <div class="card mr-2 ml-2" style="width: 22rem;">
                     <div class="mt-2" style="width:300px; height:210px">
-                        <img src="~/img/course/@item.Image" class="card-img-top" alt="Course Image">
+                        <img src="~/img/event/@item.İmage" class="card-img-top" alt="Course Image">
                     </div>
                     <div class="card-body center-block mt-2">
-                        <div>
-                            <h5 class="card-title"> <strong> @(item.Name.Length<30 ? item.Name:item.Name.Substring(30)+"...")</strong> </h5>
+                        <div>   
+                            <h5 class="card-title"> <strong> @(item.Title.Length<30 ? item.Title:item.Title.Substring(0,30)+"...")</strong> </h5>
 
-                            <h6>@(item.Description.Length<142 ? item.Description:item.Description.Substring(142 )+"...")</h6>
+                            <h6>@(item.Description.Length<120 ? item.Description:item.Description.Substring(0,120)+"...")</h6>
                         </div>
-                        <a asp-area="Admin" asp-controller="Course" asp-action="DeleteCourse" asp-route-id="@item.id" class="btn btn-danger-soft btn-sm" onclick="return confirm('Are you sure you want to delete?')"><i class="far fa-trash-alt"></i></a>
-                        <a asp-area="Admin" asp-controller="Course" asp-action="UpdateCourse" asp-route-id="@item.id" class="btn btn-success-soft btn-sm ml-1"><i class="far fa-edit"></i></a>
+                        <a asp-area="Admin" asp-controller="Event" asp-action="DeleteEvent" asp-route-id="@item.id" class="btn btn-danger-soft btn-sm" onclick="return confirm('Are you sure you want to delete?')"><i class="far fa-trash-alt"></i></a>
+                        <a asp-area="Admin" asp-controller="Event" asp-action="UpdateEvent" asp-route-id="@item.id" class="btn btn-success-soft btn-sm ml-1"><i class="far fa-edit"></i></a>
                         <a asp-area="Admin" asp-controller="Course" asp-action="UpdateFeature" asp-route-id="@item.id" class="btn btn-success-soft btn-sm ml-1"><i class="far fa-edit"></i> Feature</a>
                     </div>
                 </div>
@@ -34,12 +34,12 @@
         <nav aria-label="...">
             <ul class="pagination mt-5" style="justify-content:center">
                 <li class="page-item @(ViewBag.CurrentPage==1 ? "disabled" : "")">
-                    <a class="page-link" asp-area="admin" asp-controller="Course" asp-action="CoursePage" asp-route-page="@(ViewBag.CurrentPage-1)">Previous</a>
+                    <a class="page-link" asp-area="admin" asp-controller="Event" asp-action="Index" asp-route-page="@(ViewBag.CurrentPage-1)">Previous</a>
                 </li>
                 @for (int i = 1; i <= ViewBag.TotalPage; i++)
                 {
                     <li class="page-item @(ViewBag.CurrentPage==i ? "active":"")" style="@(ViewBag .CurrentPage==i ? "pointer-events:none":"")" aria-current="page">
-                        <a class="page-link" asp-area="admin" asp-controller="Course" asp-action="CoursePage" asp-route-page="@i">@i</a>
+                        <a class="page-link" asp-area="admin" asp-controller="Event" asp-action="Index" asp-route-page="@i">@i</a>
                     </li>
                 }
                 <li class="page-item @(ViewBag.CurrentPage==ViewBag.TotalPage ? "disabled" : "")">
