@@ -1,0 +1,34 @@
+﻿
+@model FacultyHobbyVM
+
+<div class="card center-block mb-5" style="width:50rem;">
+    <div class="card-body">
+        <form method="post" enctype="multipart/form-data">
+            <div asp-validation-summary="ModelOnly"></div>
+            <div class="card-body">
+
+
+                <div class="form-group">
+                    <select asp-for="TeacherId" class="form-select" asp-items="@(new SelectList(ViewBag.Teachers, "id", "Name"))">
+                        <option value="null">Teachers</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <select asp-for="FacultyIds" class="form-select" asp-items="@(new SelectList(ViewBag.Faculties, "id", "Name"))">
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <select asp-for="HobbyIds" class="form-select" asp-items="@(new SelectList(ViewBag.Hobbies, "id", "Name"))">
+                    </select>
+                </div>
+
+
+            </div>
+            <button type="submit" class="btn btn-success ml-4">Next</button>
+        </form>
+    </div>
+</div>
+
+
