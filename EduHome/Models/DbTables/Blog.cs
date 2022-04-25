@@ -1,7 +1,8 @@
-﻿using System;
+﻿using Microsoft.AspNetCore.Http;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
-
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace EduHome.Models.DbTables
 {
@@ -14,8 +15,10 @@ namespace EduHome.Models.DbTables
         public string Description { get; set; }
         [Required]
         public string Writer { get; set; }
-        [Required]
         public string BlogImage { get; set; }
+        [Required]
+        [NotMapped]
+        public IFormFile Photo { get; set; }
         [Required]
         public DateTime Date { get; set; }
 

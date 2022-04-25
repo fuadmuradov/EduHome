@@ -39,6 +39,7 @@ namespace EduHome.Areas.Admin.Controllers
         }
 
         [HttpPost]
+        [ValidateAntiForgeryToken]
         public async Task<IActionResult> CreateTeacher(Teacher teacher)
         {
             if (!ModelState.IsValid) return View();
@@ -53,9 +54,9 @@ namespace EduHome.Areas.Admin.Controllers
             teacher.Image = teacher.Photo.SavaAsync(webHost.WebRootPath, folder).Result;
             context.Teachers.Add(teacher);
             await context.SaveChangesAsync();
+            TempData["teacherId"] = teacher.id.ToString();
 
-
-            return LocalRedirect("/admin/Teacher/index");
+            return LocalRedirect("/admin/Teacher/AddContact");
         }
 
         public IActionResult UpdateTeacher(int id)
@@ -122,49 +123,94 @@ namespace EduHome.Areas.Admin.Controllers
 
         #endregion
 
-
         #region Contact Info CRUD
-
-        public IActionResult AddSkill(int id)
+        public IActionResult AddContact()
         {
-            Skill existskill = context.Skills.FirstOrDefault(x => x.TeacherId == id);
-            if (existskill == null) return NotFound();
-            ViewBag.Teachers = context.Teachers.ToList();
-
-            Skill skill = new Skill()
-            {
-                TeacherId = id
-            };
-
-            return View(skill);
+            return View();
         }
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> AddSkill(Skill skill)
+        public async Task<IActionResult> AddContact(Contact contact)
         {
-            if (!ModelState.IsValid) return View(skill);
-            context.Skills.Add(skill);
+            if (!ModelState.IsValid) return View(contact);
+            contact.TeacherId = Convert.ToInt32(TempData["teacherId"]);
+            await context.Contact.AddAsync(contact);
+            await context.SaveChangesAsync();
+
+            return LocalRedirect("/admin/Teacher/AddSkill?Tid=" + TempData["teacherId"].ToString());
+        }
+
+        public IActionResult UpdateContact(int Tid)
+        {
+            Contact existcontact = context.Contact.FirstOrDefault(x => x.TeacherId == Tid);
+            if (existcontact == null) return NotFound();
+            return View(existcontact);
+        }
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> UpdateContact(Contact contact)
+        {
+            if (!ModelState.IsValid) return View(contact);
+            Contact existcontact2 = context.Contact.FirstOrDefault(x => x.TeacherId == contact.TeacherId);
+            if (existcontact2 == null) return NotFound();
+            existcontact2.Mail = contact.Mail;
+            existcontact2.Phone = contact.Phone;
+            existcontact2.SkypeName = contact.SkypeName;
+            existcontact2.SkypeUrl = contact.SkypeUrl;
+            existcontact2.FacebookUrl = contact.FacebookUrl;
+            existcontact2.PinterestUrl = contact.PinterestUrl;
+            existcontact2.TwitterUrl = contact.TwitterUrl;
+
             await context.SaveChangesAsync();
 
             return View();
         }
 
-        public IActionResult UpdateSkill(int id)
+
+        #endregion
+
+        #region SKILL crud
+
+        public IActionResult AddSkill(int Tid)
         {
-            Skill skill = context.Skills.FirstOrDefault(x => x.TeacherId == id);
+            Skill existskill = context.Skills.FirstOrDefault(x => x.TeacherId == Tid);
+            if (existskill != null) return BadRequest();
+            ViewBag.Teachers = context.Teachers.ToList();
+            Skill skilll = new Skill()
+            {
+                TeacherId = Tid
+            };
+            return View(skilll);
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public IActionResult AddSkill(Skill skill)
+        {
+            if (!ModelState.IsValid) return View(skill);
+            context.Skills.Add(skill);
+            context.SaveChanges();
+
+            return LocalRedirect("/admin/Teacher/AddFacultyHobby?Tid="+skill.TeacherId.ToString());
+        }
+
+        public IActionResult UpdateSkill(int Tid)
+        {
+            Skill skill = context.Skills.FirstOrDefault(x => x.TeacherId == Tid);
             if (skill == null) return NotFound();
 
 
             return View(skill);
         }
 
+
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> UpdateSkill(Skill skill)
         {
             if (!ModelState.IsValid) return View(skill);
-            Skill existSkill = context.Skills.FirstOrDefault(x => x.TeacherId == skill.id);
+            Skill existSkill = context.Skills.FirstOrDefault(x => x.TeacherId == skill.TeacherId);
             if (existSkill == null) return NotFound();
             existSkill.Language = skill.Language;
             existSkill.Leader = skill.Leader;
@@ -174,19 +220,23 @@ namespace EduHome.Areas.Admin.Controllers
             existSkill.Communication = skill.Communication;
             await context.SaveChangesAsync();
 
-            return View();
+            return LocalRedirect("/admin/teacher/index");
         }
 
         #endregion
 
         #region Faculty and Hobby
-        public IActionResult AddFacultyHobby()
+        public IActionResult AddFacultyHobby(int Tid)
         {
+            FacultyHobbyVM facultyHobbyVM = new FacultyHobbyVM()
+            {
+                TeacherId = Tid
+            };
             ViewBag.Teachers = context.Teachers.ToList();
             ViewBag.Faculties = context.Faculties.ToList();
             ViewBag.Hobbies = context.Hobbies.ToList();
 
-            return View();
+            return View(facultyHobbyVM);
         }
 
         [HttpPost]
@@ -194,7 +244,7 @@ namespace EduHome.Areas.Admin.Controllers
         public async Task<IActionResult> AddFacultyHobby(FacultyHobbyVM facultyHobby)
         {
             if (!ModelState.IsValid) return View(facultyHobby);
-            
+
             ViewBag.Teachers = context.Teachers.ToList();
             ViewBag.Faculties = context.Faculties.ToList();
             ViewBag.Hobbies = context.Hobbies.ToList();
@@ -227,11 +277,64 @@ namespace EduHome.Areas.Admin.Controllers
             await context.SaveChangesAsync();
 
 
-            return View();
+            return LocalRedirect("/admin/Teacher/Index");
         }
 
+        public IActionResult UpdateFacultyHobby(int Tid)
+        {
+            ViewBag.Faculty = context.Faculties.ToList();
+            ViewBag.Hobby = context.Hobbies.ToList();
+
+            ViewBag.TeacherFaculty = context.TeacherFaculties.Where(x=>x.TeacherId==Tid).ToList();
+            ViewBag.TeacherHobby = context.TeacherHobbies.Where(x => x.TeacherId == Tid).ToList();
+            FacultyHobbyVM facultyHobby = new FacultyHobbyVM()
+            {
+                TeacherId = Tid
+            };
+
+
+            return View(facultyHobby);
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> UpdateFacultyHobby(FacultyHobbyVM facultyHobbyVM)
+        {
+            if (!ModelState.IsValid) return View();
+
+            List<TeacherFaculty> teacherFaculties = context.TeacherFaculties.Where(x => x.TeacherId == facultyHobbyVM.TeacherId).ToList();
+            context.TeacherFaculties.RemoveRange(teacherFaculties);
+            List<TeacherHobby> teacherHobbies = context.TeacherHobbies.Where(x => x.TeacherId == facultyHobbyVM.TeacherId).ToList();
+            context.TeacherHobbies.RemoveRange(teacherHobbies);
+
+            foreach (var item in facultyHobbyVM.FacultyIds)
+            {
+                TeacherFaculty teacherFaculty = new TeacherFaculty()
+                {
+                    TeacherId = facultyHobbyVM.TeacherId,
+                    FacultyId = item
+                };
+
+                context.TeacherFaculties.Add(teacherFaculty);
+            }
+
+            foreach (var item in facultyHobbyVM.HobbyIds)
+            {
+                TeacherHobby teacherHobby = new TeacherHobby()
+                {
+                    TeacherId = facultyHobbyVM.TeacherId,
+                    HobbyId = item
+                };
+
+                context.TeacherHobbies.Add(teacherHobby);
+            }
+
+            await context.SaveChangesAsync();
+
+            return LocalRedirect("/admin/Teacher/Index");
+        }
 
         #endregion
 
-    }
+    } 
 }

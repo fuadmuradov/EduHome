@@ -1,0 +1,76 @@
+﻿
+@model FacultyHobbyVM
+@{
+    ViewData["Title"] = "UpdateFacultyHobby";
+    List<TeacherFaculty> teacherFaculties = ViewBag.TeacherFaculty;
+    List<TeacherHobby> teacherHobbies = ViewBag.TeacherHobby;
+
+    int temp = 0;
+    int temp2 = 0;
+
+}
+
+
+<div class="card center-block mb-5" style="width:50rem;">
+    <div class="card-body">
+        <form method="post" enctype="multipart/form-data">
+            <div asp-validation-summary="ModelOnly"></div>
+            <div class="card-body">
+
+                <div class="form-group" style="display:none">
+                    <input asp-for="TeacherId" />
+                    </div>
+
+                <div class="form-group">
+                    <label class="font-weight-600">Choose with Multiselect Teacher Faculties</label>
+                    <select asp-for="FacultyIds" class="form-select">
+                        @{
+                            foreach (var item in ViewBag.Faculty)
+                            {
+
+
+                                @if (temp < teacherFaculties.Count && item.id == teacherFaculties.Skip(temp).FirstOrDefault().FacultyId)
+                                {
+                                    <option value="@item.id" selected>@item.Name</option>
+                                    temp++;
+                                }
+                                else
+                                {
+                                    <option value="@item.id">@item.Name</option>
+                                }
+                            }
+                        }
+                    </select>
+                </div>
+
+                    <div class="form-group">
+                        <label class="font-weight-600">Choose with Multiselect Teacher Hobbies</label>
+                        <select asp-for="HobbyIds" class="form-select">
+
+                            @{
+                                foreach (var item in ViewBag.Hobby)
+                                {
+
+
+                                    @if (temp2 < teacherHobbies.Count && item.id == teacherHobbies.Skip(temp2).FirstOrDefault().HobbyId)
+                                    {
+                                        <option value="@item.id" selected>@item.Name</option>
+                                        temp2++;
+                                    }
+                                    else
+                                    {
+                                        <option value="@item.id">@item.Name</option>
+                                    }
+                                }
+                            }
+                        </select>
+                    </div>
+
+
+                </div>
+                <button type="submit" class="btn btn-success ml-4">Update</button>
+</form>
+    </div>
+</div>
+
+

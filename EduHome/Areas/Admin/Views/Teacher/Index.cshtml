@@ -3,27 +3,27 @@
 <div class="body-content">
     <div class="container">
         <div class="row justify-content-center">
-            <a class="btn btn-success-soft" asp-area="Admin" asp-action="CreateSpeaker" asp-controller="Event" style="width:800px">Add Speaker</a>
+            <a class="btn btn-success-soft" asp-area="Admin" asp-action="CreateTeacher" asp-controller="Teacher" style="width:800px">Add new Teacher</a>
         </div>
         <div class="row justify-content-center">
 
             @foreach (var item in Model)
             {
-            <div class="card mr-2 ml-2" style="width: 18rem; height:30rem;">
-                <div class="mt-2 mb-2" style="width:260px; height:180px">
-                    <img src="~/img/teacher/@item.Image" class="card-img-top" alt="Teacher Image">
-                </div>
-               
-                <div class="card-body center-block mt-2">
-                    <div>
-                        <h5 class="card-title"> <strong>@(item.Name + item.Surname)</strong> </h5>
-
-                        <h6>@(item.About.Length>100 ? item.About.Substring(0,100)+"...":item.About)</h6>
+                <div class="card mr-2 ml-2" style="width: 18rem; height:30rem;">
+                    <div class="mt-2 mb-2" style="width:260px; height:180px">
+                        <img src="~/img/teacher/@item.Image" class="card-img-top" alt="Teacher Image">
                     </div>
-                    <a asp-area="Admin" asp-controller="Event" asp-action="DeleteTeacher" asp-route-id="@item.id" class="btn btn-danger-soft btn-sm" onclick="return confirm('Are you sure you want to delete?')"><i class="far fa-trash-alt"></i></a>
-                    <a asp-area="Admin" asp-controller="Event" asp-action="UpdateTeacher" asp-route-id="@item.id" class="btn btn-success-soft btn-sm ml-1"><i class="far fa-edit"></i></a>
+
+                    <div class="card-body center-block mt-2">
+                        <div>
+                            <h5 class="card-title"> <strong>@(item.Name + item.Surname)</strong> </h5>
+
+                            <h6>@(item.About.Length>100 ? item.About.Substring(0,100)+"...":item.About)</h6>
+                        </div>
+                        <a asp-area="Admin" asp-controller="Teacher" asp-action="DeleteTeacher" asp-route-id="@item.id" class="btn btn-danger-soft btn-sm" onclick="return confirm('Are you sure you want to delete?')"><i class="far fa-trash-alt"></i></a>
+                        <a asp-area="Admin" asp-controller="Teacher" asp-action="UpdateTeacher" asp-route-id="@item.id" class="btn btn-success-soft btn-sm ml-1"><i class="far fa-edit"></i></a>
+                    </div>
                 </div>
-            </div>
             }
 
         </div>

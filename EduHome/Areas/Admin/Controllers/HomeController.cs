@@ -37,7 +37,7 @@ namespace EduHome.Areas.Admin.Controllers
             if (existSlider == null) return NotFound();
             existSlider.Title = slider.Title;
             existSlider.Description = slider.Description;
-            context.SaveChangesAsync();
+            await context.SaveChangesAsync();
             return View();
         }
 
