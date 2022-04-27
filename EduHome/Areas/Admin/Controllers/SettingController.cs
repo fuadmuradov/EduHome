@@ -12,45 +12,44 @@ using System.Threading.Tasks;
 namespace EduHome.Areas.Admin.Controllers
 {
     [Area("Admin")]
-    public class TestimonialController : Controller
+    public class SettingController : Controller
     {
         private readonly MyContext context;
         private readonly IWebHostEnvironment webHost;
 
-        public TestimonialController(MyContext context, IWebHostEnvironment webHost)
+        public SettingController(MyContext context, IWebHostEnvironment webHost)
         {
             this.context = context;
             this.webHost = webHost;
         }
 
-        #region Testimonials Crud
         public IActionResult Index()
         {
-            Testimional testimional = context.Testimionals.FirstOrDefault();
-            if (testimional == null) return NotFound();
-            return View(testimional);
-        }
+            Setting setting = context.Settings.First();
+            if (setting == null) return NotFound();
 
+                return View(setting);
+        }
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Index(Testimional testimional)
+        public async Task<IActionResult> Index(Setting setting)
         {
             if (!ModelState.IsValid)
             {
-                return View(testimional);
+                return View(setting);
             }
 
-            Testimional existTestimonial = await context.Testimionals.FirstAsync();
+            Setting existSetting = await context.Settings.FirstAsync();
 
-            if (testimional.Photo != null)
+            if (setting.Photo != null)
             {
                 try
                 {
-                    string folder = @"img\testimonial\";
-                    string newImg = await testimional.Photo.SavaAsync(webHost.WebRootPath, folder);
-                    FileExtension.Delete(webHost.WebRootPath, folder, existTestimonial.Image);
-                    existTestimonial.Image = newImg;
+                    string folder = @"img\logo\";
+                    string newImg = await setting.Photo.SavaAsync(webHost.WebRootPath, folder);
+                    FileExtension.Delete(webHost.WebRootPath, folder, existSetting.Logo);
+                    existSetting.Logo = newImg;
                 }
                 catch (Exception e)
                 {
@@ -59,19 +58,17 @@ namespace EduHome.Areas.Admin.Controllers
                 }
 
             }
-            existTestimonial.Fullname = testimional.Fullname;
-            existTestimonial.Description = testimional.Description;
-            existTestimonial.Responsibility = testimional.Responsibility;
+            existSetting.Address = setting.Address;
+            existSetting.phone1 = setting.phone1;
+            existSetting.phone2 = setting.phone2;
+            existSetting.Description = setting.Description;
+            existSetting.Mail = setting.Mail;
+            existSetting.WebSite = setting.WebSite;
             await context.SaveChangesAsync();
 
 
             return LocalRedirect("/Admin/Testimonial/index");
         }
-
-
-        #endregion
-
-
 
     }
 }

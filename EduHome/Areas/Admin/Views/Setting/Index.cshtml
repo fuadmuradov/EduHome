@@ -1,0 +1,55 @@
+﻿@model Setting
+<div class="container">
+    <div class="row">
+        <div class="col-md-12 col-lg-12">
+            <div class="card center-block mb-5" style="width:50rem;">
+                <div class="card-body">
+                    <form method="post" enctype="multipart/form-data">
+                        <div asp-validation-summary="ModelOnly"></div>
+                        <div class="form-group">
+                            <label asp-for="@Model.Address" class="font-weight-600"></label>
+                            <input asp-for="@Model.Address" class="form-control" id="exampleFormControlInput1" placeholder="Slider Title">
+                            <span asp-validation-for="Address">  </span>
+                        </div>
+                        <div class="form-group">
+                            <label asp-for="@Model.phone1" class="font-weight-600"></label>
+                            <input asp-for="@Model.phone1" class="form-control" id="exampleFormControlInput1" placeholder="Slider Description">
+                            <span asp-validation-for="phone1">  </span>
+                        </div>
+                        <div class="form-group">
+                            <label asp-for="@Model.phone2" class="font-weight-600"></label>
+                            <input asp-for="@Model.phone2" class="form-control" id="exampleFormControlInput1" placeholder="Slider Description">
+                            <span asp-validation-for="phone2">  </span>
+                        </div>
+                        <div class="form-group">
+                            <label asp-for="@Model.Description" class="font-weight-600"></label>
+                            <input asp-for="@Model.Description" class="form-control" id="exampleFormControlInput1" placeholder="Slider Description">
+                            <span asp-validation-for="Description">  </span>
+                        </div>
+                        <div class="form-group">
+                            <label asp-for="@Model.Mail" class="font-weight-600"></label>
+                            <input asp-for="@Model.Mail" class="form-control" id="exampleFormControlInput1" placeholder="Slider Description">
+                            <span asp-validation-for="Mail">  </span>
+                        </div>
+                        <div class="form-group">
+                            <label asp-for="@Model.WebSite" class="font-weight-600"></label>
+                            <input asp-for="@Model.WebSite" class="form-control" id="exampleFormControlInput1" placeholder="Slider Description">
+                            <span asp-validation-for="WebSite">  </span>
+                        </div>
+                        <div>
+                            <img src="~/img/logo/@Model.Logo" alt="about" style="width:200px; height:120px" />
+                        </div>
+                        <div class="form-group">
+                            <label asp-for="@Model.Photo" class="font-weight-600"></label>
+                            <input asp-for="@Model.Photo" class="form-control" id="exampleFormControlInput1" placeholder="Slider Description">
+                            <span asp-validation-for="Photo">  </span>
+                        </div>
+                        <button type="submit" class="btn btn-success" onclick="return confirm('Are you sure you want to Update?')">Update</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
+
