@@ -67,7 +67,7 @@ namespace EduHome.Areas.Admin.Controllers
             await context.SaveChangesAsync();
 
 
-            return LocalRedirect("/Admin/Testimonial/index");
+            return View();
         }
 
     }
