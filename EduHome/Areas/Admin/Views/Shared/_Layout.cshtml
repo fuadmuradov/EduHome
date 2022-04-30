@@ -84,9 +84,10 @@
                                 Home
                             </a>
                             <ul class="nav-second-level">
-                                <li><a href="/admin/Home/Slider">Slider</a></li>
-                                <li><a href="/admin/Home/HomeInfo">Home Info</a></li>
-                                <li><a href="/admin/Home/Advantage">Advantage</a></li>
+                                <li><a asp-area="Admin" asp-controller="Home" asp-action="Index">Slider</a></li>
+                                <li><a asp-area="Admin" asp-controller="Home" asp-action="Create">Add Slider</a></li>
+                                <li><a asp-area="Admin" asp-controller="Home" asp-action="Notice">Notice</a></li>
+                                <li><a asp-area="Admin" asp-controller="Home" asp-action="NoticeSecond">Second part Notice</a></li>
                             </ul>
                         </li>
                         <li>
@@ -95,43 +96,43 @@
                                 About
                             </a>
                             <ul class="nav-second-level">
-                                <li><a href="/admin/About/AboutUs">About Us</a></li>
-                                <li><a href="/admin/About/Pricing">Pricing</a></li>
-                                <li><a href="/admin/About/FaqPage">FAQ</a></li>
-                                <li><a href="/admin/About/Testimonial">Testimonial</a></li>
+                                <li><a asp-area="Admin" asp-controller="Home" asp-action="About">About</a></li>
+                                <li><a asp-area="Admin" asp-controller="Testimonial" asp-action="Index">Testimonial</a></li>
+
 
                             </ul>
                         </li>
                         <li>
                             <a class="has-arrow material-ripple" href="#">
                                 <i class="typcn typcn-mail mr-2"></i>
-                                Practice Area
+                               COURSE
                             </a>
                             <ul class="nav-second-level">
-                                <li><a href="/admin/Practice/PracticePage">Practices</a></li>
-                                <li><a href="/admin/Practice/PracticeCreate">Add Practice</a></li>
+                                <li><a asp-area="Admin" asp-controller="Course" asp-action="CoursePage">Courses</a></li>
+                                <li><a asp-area="Admin" asp-controller="Course" asp-action="Createcourse">Add Course</a></li>
+                                <li><a asp-area="Admin" asp-controller="Course" asp-action="Category">Categories</a></li>
 
                             </ul>
                         </li>
                         <li>
                             <a class="has-arrow material-ripple" href="#">
                                 <i class="typcn typcn-archive mr-2"></i>
-                                Attorney
+                                Event
                             </a>
                             <ul class="nav-second-level">
-                                <li><a href="/admin/Attorney/AttorneyPage">Attorney Page</a></li>
-                                <li><a href="/admin/Attorney/AttorneyAward">Attorney Award</a></li>
-                                <li><a href="/admin/Attorney/AttorneyPractice">Attorney Practice</a></li>
+                                <li><a asp-area="Admin" asp-controller="Course" asp-action="Index">Event</a></li>
+                                <li><a asp-area="Admin" asp-controller="Course" asp-action="Createevent">Create Event</a></li>
+                                <li><a asp-area="Admin" asp-controller="Course" asp-action="Speaker">Speakers</a></li>
                             </ul>
                         </li>
                         <li>
                             <a class="has-arrow material-ripple" href="#">
                                 <i class="typcn typcn-clipboard mr-2"></i>
-                                Case Studies
+                                Teacher
                             </a>
                             <ul class="nav-second-level">
-                                <li><a href="/admin/Case/Index">Case</a></li>
-                                <li><a href="/admin/Case/CaseCreate">Case Create</a></li>
+                                <li><a asp-area="Admin" asp-controller="Teacher" asp-action="Index">Teachers</a></li>
+                                <li><a asp-area="Admin" asp-controller="Teacher" asp-action="CreateTeacher">Create Teacher</a></li>
 
                             </ul>
                         </li>
@@ -141,18 +142,17 @@
                                 Blog
                             </a>
                             <ul class="nav-second-level">
-                                <li><a href="/admin/Blog/Index">Blog Writers</a></li>
-                                <li><a href="/admin/Blog/BlogWriterCreate">Add Blog Writer</a></li>
-                                <li><a href="/admin/Blog/BlogCreate">Add Blog</a></li>
+                                <li><a asp-area="Admin" asp-controller="Blog" asp-action="Index">Blogs</a></li>
+                                <li><a asp-area="Admin" asp-controller="Blog" asp-action="CreateBlog">Add Blog</a></li>
                             </ul>
                         </li>
                         <li>
                             <a class="has-arrow material-ripple" href="#">
                                 <i class="typcn typcn-world-outline mr-2"></i>
-                                Contact
+                                Settings
                             </a>
                             <ul class="nav-second-level">
-                                <li><a href="/admin/Contact/Index">Contact</a></li>
+                                <li><a asp-area="Admin" asp-controller="Setting" asp-action="Index">Setting</a></li>
 
                             </ul>
                         </li>

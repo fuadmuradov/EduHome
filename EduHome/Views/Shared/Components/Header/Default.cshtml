@@ -10,10 +10,22 @@
                 </div>
                 <div class="col-md-4 col-sm-4 col-xs-12">
                     <div class="header-top-right text-right">
-                        <ul>
-                            <li><a href="login.html">login</a></li>
-                            <li><a href="signup.html">signup</a></li>
-                        </ul>
+                        @if (User.Identity.IsAuthenticated)
+                        {
+                            <ul>
+                                <li><a href="#">@(User.Identity.Name)</a></li>
+                                <li><a asp-controller="Account" asp-action="Logout">SignOut</a></li>
+                            </ul>
+                        }
+                        else
+                        {
+                            <ul>
+                                <li><a asp-controller="Account" asp-action="Login">login</a></li>
+                                <li><a asp-controller="Account" asp-action="Register">signup</a></li>
+                            </ul>
+                        }
+
+
                     </div>
                 </div>
             </div>
@@ -37,10 +49,7 @@
                                         <a asp-controller="Home" asp-action="Index" >Home</a>
                                         <ul>
                                             <li><a asp-controller="Home" asp-action="Index">Home One</a></li>
-                                            <li><a href="index-2.html">Home Two</a></li>
-                                            <li><a href="index-3.html">Home Three</a></li>
-                                            <li><a href="index-4.html">Home Four</a></li>
-                                            <li><a href="index-5.html">Home Five</a></li>
+
                                         </ul>
                                     </li>
                                     <li><a asp-controller="Home" asp-action="About">About</a></li>
@@ -55,9 +64,7 @@
                                         <a asp-controller="Event" asp-action="EventHome">event</a>
                                         <ul>
                                             <li><a asp-controller="Event" asp-action="EventHome">event</a></li>
-                                            <li><a asp-controller="Event" asp-action="EventHome">event left sidebar</a></li>
-                                            <li><a asp-controller="Event" asp-action="EventHome">event right sidebar</a></li>
-                                            <li><a asp-controller="Event" asp-action="EventDetails">event details</a></li>
+                                           <li><a asp-controller="Event" asp-action="EventDetails">event details</a></li>
                                         </ul>
                                     </li>
                                     <li class="hidden-sm">
@@ -71,8 +78,6 @@
                                         <a asp-controller="Blog" asp-action="Blogs">blog</a>
                                         <ul>
                                             <li><a asp-controller="Blog" asp-action="Blogs">blog</a></li>
-                                            <li><a href="blog-left-side-bar.html">blog left sidebar</a></li>
-                                            <li><a href="blog-right-side-bar.html">blog righ sidebar</a></li>
                                             <li><a asp-controller="Blog" asp-action="BlogDetails">blog details</a></li>
                                         </ul>
                                     </li>

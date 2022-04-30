@@ -1,6 +1,7 @@
 ﻿using EduHome.Extensions;
 using EduHome.Models;
 using EduHome.Models.DbTables;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
 using System;
@@ -12,6 +13,7 @@ namespace EduHome.Areas.Admin.Controllers
 {
     [Area("Admin")]
     [Route("Admin/[controller]/[action]")]
+    [Authorize]
     public class EventController : Controller
     {
         private readonly MyContext context;

@@ -12,6 +12,7 @@ using System.Threading.Tasks;
 namespace EduHome.Areas.Admin.Controllers
 {
     [Area("Admin")]
+    [Route("admin/[controller]/[action]")]
     public class TestimonialController : Controller
     {
         private readonly MyContext context;

@@ -43,7 +43,8 @@
                                 <span>Please login using account detail bellow.</span>
                             </div>
                             <div class="login-form">
-                                <form action="#" method="post">
+                                <form method="post">
+                                    <div class="alert alert-danger" asp-validation-summary="ModelOnly"></div>
                                     <input asp-for="Email" placeholder="Email">
                                     <input asp-for="Password" placeholder="Password">
                                     <div class="button-box">

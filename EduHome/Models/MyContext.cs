@@ -38,5 +38,7 @@ namespace EduHome.Models
         public DbSet<Testimional> Testimionals { get; set; }
 
         public DbSet<Setting> Settings { get; set; }
+
+        public DbSet<Notification> Notifications { get; set; } 
     }
 }
