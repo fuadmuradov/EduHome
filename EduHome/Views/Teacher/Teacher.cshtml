@@ -26,17 +26,17 @@
 <!-- Teacher Start -->
 <div class="teacher-area pt-150 pb-105">
     <div class="container">
-        <div class="row">
+        <div id="ParentDiv" class="row">
 
             @foreach (var item in Model)
             {
-                <div class="col-md-3 col-sm-4 col-xs-12">
+                <div id="ChildDiv" class="col-md-3 col-sm-4 col-xs-12">
                     <div class="single-teacher mb-45">
                         <div class="single-teacher-img">
                             <a asp-controller="Teacher" asp-action="TeacherDetails" asp-route-id="@item.id"><img src="~/img/teacher/@item.Image" alt="teacher"></a>
                         </div>
                         <div class="single-teacher-content text-center">
-                            <h2><a asp-controller="Teacher" asp-action="TeacherDetails" asp-route-id="@item.id">@item.Name @item.Surname</a></h2>
+                            <h2><a id="Names" asp-controller="Teacher" asp-action="TeacherDetails" asp-route-id="@item.id">@item.Name @item.Surname</a></h2>
                             <h4>@item.Job</h4>
                             <ul>
                                 <li><a href="@item.Contacts.FirstOrDefault(x=>x.TeacherId==item.id).FacebookUrl"><i class="zmdi zmdi-facebook"></i></a></li>
@@ -50,8 +50,32 @@
             }
 
 
-          
+
         </div>
     </div>
 </div>
 <!-- Teacher End -->
+
+@section Script{
+    <script>
+        function myFunction() {
+
+
+            var input, filter, Parent, Child, a, i, txtValue;
+            
+            input = document.getElementById("myInput");
+            filter = input.value.toUpperCase();
+            let matches = document.querySelectorAll("#ChildDiv");
+            for (i = 0; i < matches.length; i++) {
+                let a = matches[i].querySelector('a[id="Names"]');
+                     txtValue = a.textContent || a.innerText;
+                if (txtValue.toUpperCase().indexOf(filter) > -1) {
+                    matches[i].classList.remove('d-none');
+                } else {
+                    matches[i].classList.add('d-none')
+                }
+            }
+          
+        }
+    </script>
+}

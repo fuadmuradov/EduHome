@@ -2,7 +2,6 @@
 <!-- Header Area Start -->
 @await Component.InvokeAsync("Header")
 <!-- Header Area End -->
-
 <!-- Banner Area Start -->
 <div class="banner-area-wrapper">
     <div class="banner-area text-center">
@@ -20,14 +19,13 @@
     </div>
 </div>
 <!-- Banner Area End -->
-
 <!-- Event Start -->
 <div class="event-area three text-center pt-150 pb-150">
     <div class="container">
-        <div class="row">
+        <div id="ParentDiv" class="row">
             @foreach (var item in Model)
             {
-                <div class="col-md-4 col-sm-6 col-xs-12">
+                <div id="ChildDiv" class="col-md-4 col-sm-6 col-xs-12">
                     <div class="single-event mb-60">
                         <div class="event-img">
                             <a asp-controller="Event" asp-action="EventDetails" asp-route-id="@item.id">
@@ -41,7 +39,7 @@
                             </div>
                         </div>
                         <div class="event-content text-left">
-                            <h4><a asp-controller="Event" asp-action="EventDetails" asp-route-id="@item.id">@item.Title</a></h4>
+                            <h4><a id="Names" asp-controller="Event" asp-action="EventDetails" asp-route-id="@item.id">@item.Title</a></h4>
                             <ul>
                                 <li><span>time:</span> @item.Date.ToString("hh.mm") - 4.45 PM</li>
                                 <li><span>venue</span> @item.Location</li>
@@ -56,8 +54,33 @@
 
 
 
-        
+
         </div>
     </div>
 </div>
 <!-- Event End -->
+
+
+@section Script{
+    <script>
+        function myFunction() {
+
+
+            var input, filter, Parent, Child, a, i, txtValue;
+
+            input = document.getElementById("myInput");
+            filter = input.value.toUpperCase();
+            let matches = document.querySelectorAll("#ChildDiv");
+            for (i = 0; i < matches.length; i++) {
+                let a = matches[i].querySelector('a[id="Names"]');
+                txtValue = a.textContent || a.innerText;
+                if (txtValue.toUpperCase().indexOf(filter) > -1) {
+                    matches[i].classList.remove('d-none');
+                } else {
+                    matches[i].classList.add('d-none')
+                }
+            }
+
+        }
+    </script>
+}

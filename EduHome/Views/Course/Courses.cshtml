@@ -1,8 +1,8 @@
-﻿	
+﻿
 @model List<Course>
 
 @await Component.InvokeAsync("Header")
-	<!-- Banner Area Start -->
+<!-- Banner Area Start -->
 <div class="banner-area-wrapper">
     <div class="banner-area text-center">
         <div class="container">
@@ -35,11 +35,11 @@
                 </div>
             </div>
         </div>
-        <div class="row">
+        <div id="ParentDiv" class="row">
 
             @foreach (var item in Model)
             {
-                <div class="col-md-4 col-sm-6 col-xs-12">
+                <div id="ChildDiv" class="col-md-4 col-sm-6 col-xs-12">
                     <div class="single-course mb-70">
                         <div class="course-img">
                             <a asp-controller="Course" asp-action="CourseDetails" asp-route-id="@item.id">
@@ -50,8 +50,8 @@
                             </a>
                         </div>
                         <div class="course-content">
-                            <h3><a asp-controller="Course" asp-action="CourseDetails" asp-route-id="@item.id">@item.Name</a></h3>
-          
+                            <h3><a id="Names" asp-controller="Course" asp-action="CourseDetails" asp-route-id="@item.id">@item.Name</a></h3>
+
                             <p>@item.Description</p>
                             <a class="default-btn" asp-controller="Course" asp-action="CourseDetails" asp-route-id="@item.id">read more</a>
                         </div>
@@ -65,3 +65,27 @@
     </div>
 </div>
 <!-- Course End -->
+
+@section Script{
+    <script>
+        function myFunction() {
+
+
+            var input, filter, Parent, Child, a, i, txtValue;
+
+            input = document.getElementById("myInput");
+            filter = input.value.toUpperCase();
+            let matches = document.querySelectorAll("#ChildDiv");
+            for (i = 0; i < matches.length; i++) {
+                let a = matches[i].querySelector('a[id="Names"]');
+                     txtValue = a.textContent || a.innerText;
+                if (txtValue.toUpperCase().indexOf(filter) > -1) {
+                    matches[i].classList.remove('d-none');
+                } else {
+                    matches[i].classList.add('d-none')
+                }
+            }
+
+        }
+    </script>
+}

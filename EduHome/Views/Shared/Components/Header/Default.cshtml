@@ -46,7 +46,7 @@
                             <nav>
                                 <ul>
                                     <li>
-                                        <a asp-controller="Home" asp-action="Index" >Home</a>
+                                        <a asp-controller="Home" asp-action="Index">Home</a>
                                         <ul>
                                             <li><a asp-controller="Home" asp-action="Index">Home One</a></li>
 
@@ -64,7 +64,7 @@
                                         <a asp-controller="Event" asp-action="EventHome">event</a>
                                         <ul>
                                             <li><a asp-controller="Event" asp-action="EventHome">event</a></li>
-                                           <li><a asp-controller="Event" asp-action="EventDetails">event details</a></li>
+                                            <li><a asp-controller="Event" asp-action="EventDetails">event details</a></li>
                                         </ul>
                                     </li>
                                     <li class="hidden-sm">
@@ -96,7 +96,7 @@
                             <div class="search">
                                 <div class="search-form">
                                     <form id="search-form" action="#">
-                                        <input type="search" placeholder="Search here..." name="search" />
+                                        <input id="myInput" type="search" placeholder="Search here..." onkeyup="myFunction()" name="search" />
                                         <button type="submit">
                                             <span><i class="fa fa-search"></i></span>
                                         </button>
