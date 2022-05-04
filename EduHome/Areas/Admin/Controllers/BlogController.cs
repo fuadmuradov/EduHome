@@ -13,7 +13,7 @@ namespace EduHome.Areas.Admin.Controllers
 {
     [Area("Admin")]
     [Route("Admin/[controller]/[action]")]
-    [Authorize]
+    [Authorize(Roles ="Admin")]
     public class BlogController : Controller
     {
         private readonly MyContext context;

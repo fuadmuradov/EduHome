@@ -2,6 +2,7 @@
 using EduHome.Models;
 using EduHome.Models.DbTables;
 using EduHome.ViewModels;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
 using System;
@@ -13,6 +14,7 @@ namespace EduHome.Areas.Admin.Controllers
 {
     [Area("admin")]
     [Route("Admin/[controller]/[action]")]
+    [Authorize(Roles = "Admin")]
     public class TeacherController : Controller
     {
         private readonly MyContext context;
